@@ -1,0 +1,39 @@
+<ion-header> </ion-header>
+
+<ion-content>
+  <ion-list class="center">
+    <ion-row *ngIf="!apiServer">
+      <ion-col>
+        <ion-button color="dark" expand="full" (click)="scanCode()"
+          >QR SCAN CODE</ion-button
+        >
+      </ion-col>
+    </ion-row>
+
+    <ion-row *ngIf="apiServer">
+      <ion-col>
+        <ion-button color="dark" expand="full" (click)="checkServerStatus()"
+          >Check Sever Status</ion-button
+        >
+      </ion-col>
+      <ion-text>{{this.serverStatus.status}}</ion-text>
+    </ion-row>
+
+    <ion-row *ngIf="apiServer">
+      <ion-col>
+        <ion-button
+          disabled="serverStatus.status!=='ok"
+          color="dark"
+          expand="full"
+          (click)="takePhotoAndUpload()"
+          >take photo & upload it</ion-button
+        >
+      </ion-col>
+      <ion-text>{{serverStatus.status}}</ion-text>
+    </ion-row>
+  </ion-list>
+  <ion-content *ngIf="photo && photo.webviewPath">
+    <ion-row> you uploaded picture</ion-row>
+    <ion-img src="{{photo.webviewPath}}"></ion-img>
+  </ion-content>
+</ion-content>
